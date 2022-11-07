@@ -8,6 +8,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start:dev": "set NODE_ENV=dev&& nodemon index.js"
   }
 }

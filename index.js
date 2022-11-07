@@ -15,7 +15,7 @@ setInterval(() => {
 // Decryption
 function decryptedPath(cipher) {
   try {
-    var decrypted = CryptoJS.Rabbit.decrypt(cipher, "12345678");
+    var decrypted = CryptoJS.Rabbit.decrypt(cipher, process.env.PRIVATE_KEY);
     var originalText = decrypted.toString(CryptoJS.enc.Utf8);
     var result = {
       account: originalText.split('/')[0], 
@@ -33,13 +33,12 @@ function decryptedPath(cipher) {
 
 async function DOWNLOADITEM(account, project, survey, response, id) {
   const client = new ftp.Client()
+  client.ftp.verbose = process.env.NODE_ENV == 'dev' ? true : false
   try {
     await client.access({
         host: process.env.FTP_ADDRESS,
         user: process.env.FTP_USERNAME,
         password: process.env.FTP_PASSWORD,
-        secure: true,
-        secureOptions: { rejectUnauthorized: false }
     })
     var result = await client.downloadTo("temp/"+id,`/accounts/${account}/${project}/${survey}/${response}/${id}`).catch((err) => console.log(err))
     client.close()
@@ -55,7 +54,7 @@ app.use(express.static('temp'));
 
 app.get('/static/:path', async (req, res) => {
   // Decrypt URL
-  const encryptedPath = req.params.path.replace('*', '/');
+  const encryptedPath = req.params.path.replaceAll('*', '/');
   if (decryptedPath(encryptedPath) != null) {
     var account = decryptedPath(encryptedPath).account;
     var project = decryptedPath(encryptedPath).project;

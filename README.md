@@ -1,7 +1,8 @@
 # file-server
 
 `yarn install` for setup
-* Create a `/temp` folder, and setup your `.env` file before you begin
+Create a `/temp` folder, and setup your `.env` file before you begin
+ 
 `yarn start:dev` for the development server
 `yarn start` for production
 

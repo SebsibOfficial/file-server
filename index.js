@@ -52,7 +52,7 @@ async function DOWNLOADITEM(account, project, survey, response, id) {
 
 app.use(express.static('temp'));
 
-app.get('file/static/:path', async (req, res) => {
+app.get('/file/static/:path', async (req, res) => {
   // Decrypt URL
   const encryptedPath = req.params.path.replaceAll('*', '/');
   if (decryptedPath(encryptedPath) != null) {

@@ -18,11 +18,11 @@ function decryptedPath(cipher) {
     var decrypted = CryptoJS.Rabbit.decrypt(cipher, process.env.PRIVATE_KEY);
     var originalText = decrypted.toString(CryptoJS.enc.Utf8);
     var result = {
-      account: originalText.split('/')[0], 
-      project: originalText.split('/')[1], 
-      survey: originalText.split('/')[2], 
-      response: originalText.split('/')[3], 
-      id: originalText.split('/')[4]
+      account: originalText.split('/')[1], 
+      project: originalText.split('/')[2], 
+      survey: originalText.split('/')[3], 
+      response: originalText.split('/')[4], 
+      id: originalText.split('/')[5]
     }
     return result
   } catch (error) {

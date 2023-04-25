@@ -358,6 +358,6 @@ app.post('/file/upload-pic', async (req, res) => {
   });
 })
 
-app.listen(port, () => {
-  console.log(`File server listening on port ${port}`)
+app.listen(process.env.PORT, () => {
+  console.log(`File server listening on port ${process.env.PORT}`)
 })
